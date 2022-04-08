@@ -14,6 +14,7 @@
         <div class="app-wrapper">
             <div class="app-content">
                 <main role="main">
+                    
                     @yield('content')
                 </main>
             </div>
