@@ -14,8 +14,13 @@
         <div class="app-wrapper">
             <div class="app-content">
                 <main role="main">
-                    
+        <div class="container-fluid">
+        <div class="row">    
+
+                    @include('partials.navbar')
                     @yield('content')
+        </div>
+        </div>                    
                 </main>
             </div>
         </div>
