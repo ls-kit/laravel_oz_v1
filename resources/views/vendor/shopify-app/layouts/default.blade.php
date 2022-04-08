@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ \Osiset\ShopifyApp\Util::getShopifyConfig('app_name') }}</title>
+        <title>{{ config('shopify-app.app_name') }}</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
         <link rel="stylesheet" href="{{asset('css/app.css')}}" />
         @yield('styles')
@@ -25,9 +25,9 @@
             </div>
         </div>
 
-        @if(\Osiset\ShopifyApp\Util::getShopifyConfig('appbridge_enabled'))
-            <script src="https://unpkg.com/@shopify/app-bridge{{ \Osiset\ShopifyApp\Util::getShopifyConfig('appbridge_version') ? '@'.config('shopify-app.appbridge_version') : '' }}"></script>
-            <script src="https://unpkg.com/@shopify/app-bridge-utils{{ \Osiset\ShopifyApp\Util::getShopifyConfig('appbridge_version') ? '@'.config('shopify-app.appbridge_version') : '' }}"></script>
+        @if(config('shopify-app.appbridge_enabled'))
+            <script src="https://unpkg.com/@shopify/app-bridge{{ config('shopify-app.appbridge_version') ? '@'.config('shopify-app.appbridge_version') : '' }}"></script>
+            <script src="https://unpkg.com/@shopify/app-bridge-utils{{ config('shopify-app.appbridge_version') ? '@'.config('shopify-app.appbridge_version') : '' }}"></script>
             <script
                 @if(\Osiset\ShopifyApp\Util::getShopifyConfig('turbo_enabled'))
                     data-turbolinks-eval="false"
@@ -38,7 +38,7 @@
                 var utils = window['app-bridge-utils'];
                 var createApp = AppBridge.default;
                 var app = createApp({
-                    apiKey: "{{ \Osiset\ShopifyApp\Util::getShopifyConfig('api_key', $shopDomain ?? Auth::user()->name ) }}",
+                    apiKey: "{{ config('shopify-app.api_key', $shopDomain ?? Auth::user()->name )  }}",
                     shopOrigin: "{{ $shopDomain ?? Auth::user()->name }}",
                     host: "{{ \Request::get('host') }}",
                     forceRedirect: true,
