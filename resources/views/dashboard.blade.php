@@ -21,8 +21,8 @@
 
 <div class="container-fluid">
   <div class="row">
-    
-  <h2>sidebar included from nav file </h2>
+
+  <!-- sidebar included from nav file -->
   @include('partials.navbar')
 
 
