@@ -31,7 +31,7 @@ Route::group(['middleware' => 'verify.shopify'], function () {
     Route::view('/customers', 'customers');
     Route::view('/settings', 'settings');
 
-    Route::get('/sinfo', function () {
+    Route::get('/sinfo.json', function () {
         $shop = Auth::user();
         $shopApi = $shop->api()->rest('GET', '/admin/themes.json')['body'];
 
