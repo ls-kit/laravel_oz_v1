@@ -18,6 +18,8 @@
     @parent
 
     <script>
+      var AppBridge = window['app-bridge'];
+      var actions = AppBridge.actions;
       var titleBarOptions = {
         title: 'Customers',
       }
