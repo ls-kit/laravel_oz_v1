@@ -19,21 +19,37 @@ use Illuminate\Support\Facades\Auth;
 //     return view('welcome');
 // });
 
-Route::get('/', function () {
-    return view('dashboard');
-})->middleware(['verify.shopify'])->name('home');
+// Route::get('/', function () {
+//     return view('dashboard');
+// })->middleware(['verify.shopify'])->name('home');
 
-Route::group(['middleware' => ['verify.shopify']],function () {
-    // Route::view('/dashboard', 'dashboard');
+// Route::group(['middleware' => ['verify.shopify']],function () {
+//     // Route::view('/dashboard', 'dashboard');
+//     Route::view('/products', 'products');
+//     Route::view('/customers', 'customers');
+//     Route::view('/settings', 'settings');
+
+
+//     Route::get('test', function(){
+//         // $shop = Auth::user();
+//         return "Testing data";
+//     });
+
+// });
+
+
+Route::group(['middleware' => 'verify.shopify'], function () {
+    Route::get('/', function () {
+        return view('dashboard');
+    })->name('home');
+    
     Route::view('/products', 'products');
     Route::view('/customers', 'customers');
     Route::view('/settings', 'settings');
 
-
-    Route::get('test', function(){
-        // $shop = Auth::user();
-        return "Testing data";
-    });
+    Route::get('/test', function () {
+        return "testing...";
+    })->name('test');
+    
 
 });
-
