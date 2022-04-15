@@ -1,12 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
-namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Log;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -35,8 +31,8 @@ Route::group(['middleware' => ['verify.shopify']],function () {
 
 
     Route::get('test', function(){
-        $shop = Auth::user();
-        return $shop;
+        // $shop = Auth::user();
+        return "Testing data";
     });
 
 });
