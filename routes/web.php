@@ -26,4 +26,12 @@ Route::group(['middleware' => ['verify.shopify']],function () {
     Route::view('/products', 'products');
     Route::view('/customers', 'customers');
     Route::view('/settings', 'settings');
+
+
+    Route::get('test', function(){
+        $shop = Auth::user();
+        return " few data";
+    });
+
 });
+
