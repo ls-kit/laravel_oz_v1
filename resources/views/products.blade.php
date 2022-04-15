@@ -18,7 +18,10 @@
     @parent
 
     <script>
-        actions.TitleBar.create(app, { title: 'Welcome' });
+      var titleBarOptions = {
+        title: 'Products',
+      }
+        actions.TitleBar.create(app, titleBarOptions);
     </script>
 
 
