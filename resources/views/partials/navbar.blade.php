@@ -26,7 +26,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link @if(Request::path()== 'sinfo') active @endif" href="/sinfo">
+            <a class="nav-link @if(Request::path()== 'sinfo') active @endif" href="/sinfo.json">
               <span data-feather="users"></span>
               Shop Info
             </a>
