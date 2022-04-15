@@ -17,11 +17,12 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::get('/', function () {
-    return view('dashboard');
-})->middleware(['verify.shopify'])->name('home');
+// Route::get('/', function () {
+//     return view('dashboard');
+// })->middleware(['verify.shopify'])->name('home');
 
 Route::group(['middleware' => ['verify.shopify']],function () {
+    Route::view('/dashboard', 'dashboard');
     Route::view('/products', 'products');
     Route::view('/customers', 'customers');
     Route::view('/settings', 'settings');
