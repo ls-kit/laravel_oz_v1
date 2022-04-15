@@ -47,7 +47,7 @@ Route::group(['middleware' => 'verify.shopify'], function () {
     Route::view('/customers', 'customers');
     Route::view('/settings', 'settings');
 
-    Route::get('/test', function () {
+    Route::get('/sinfo', function () {
         return "testing...";
     })->name('test');
     
