@@ -21,7 +21,7 @@ Route::get('/', function () {
     return view('dashboard');
 })->middleware(['verify.shopify'])->name('home');
 
-Route::group(['middleware' => ['auth.shopify']],function () {
+Route::group(['middleware' => ['verify.shopify']],function () {
     // Route::view('/dashboard', 'dashboard');
     Route::view('/products', 'products');
     Route::view('/customers', 'customers');
