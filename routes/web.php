@@ -36,7 +36,7 @@ Route::group(['middleware' => 'verify.shopify'], function () {
 
         $shop = Auth::user();
         $themes = $shop->api()->rest('GET', '/admin/api/2022-04/themes.json');
-        dd($themes)
+        dd($themes);
 
         //search for the right theme id with the main role
         $activeTheme = array_filter(
@@ -49,7 +49,7 @@ Route::group(['middleware' => 'verify.shopify'], function () {
 
         $activeThemeId = $activeTheme[0]['id'];
 
-        dd($activeThemeId)
+        dd($activeThemeId);
 
         $snippet = "Your snippet code updated 3";
         //Snippet to pass to rest api request
