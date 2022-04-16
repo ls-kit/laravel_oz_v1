@@ -31,6 +31,12 @@
               Shop Info
             </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link @if(Request::path()== 'sinfo') active @endif" href="/sinfo">
+              <span data-feather="users"></span>
+              Info
+            </a>
+          </li>
         </ul>
       </div>
     </nav>
