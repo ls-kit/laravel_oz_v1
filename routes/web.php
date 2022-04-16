@@ -31,7 +31,7 @@ Route::group(['middleware' => 'verify.shopify'], function () {
     Route::view('/customers', 'customers');
     Route::view('/settings', 'settings');
 
-    Route::get('/sinfo.json', function () {
+    Route::get('/sinfo', function () {
 
 
         $shop = Auth::user();
@@ -45,9 +45,11 @@ Route::group(['middleware' => 'verify.shopify'], function () {
                 return $e['role'] == $searchedThemeRole;
             }
         );
-        dd($activeTheme)
+        
 
         $activeThemeId = $activeTheme[0]['id'];
+
+        dd($activeThemeId)
 
         $snippet = "Your snippet code updated 3";
         //Snippet to pass to rest api request
