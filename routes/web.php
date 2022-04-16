@@ -32,10 +32,36 @@ Route::group(['middleware' => 'verify.shopify'], function () {
     Route::view('/settings', 'settings');
 
     Route::get('/sinfo.json', function () {
-        $shop = Auth::user();
-        $themes = $shop->api()->rest('GET', '/admin/themes.json');
 
-        return json_encode($themes);
+
+        $shop = Auth::user();
+        $themes = $shop->api()->rest('GET', '/admin/api/2022-04/themes.json');
+        dd($themes)
+
+        //search for the right theme id with the main role
+        $activeTheme = array_filter(
+            $shopThemes->toArray(),
+            function ($e) use (&$searchedThemeRole) {
+                return $e['role'] == $searchedThemeRole;
+            }
+        );
+        dd($activeTheme)
+
+        $activeThemeId = $activeTheme[0]['id'];
+
+        $snippet = "Your snippet code updated 3";
+        //Snippet to pass to rest api request
+        $data = array(
+            'asset'=> [
+                'key' => 'snippets/deidax-wishlist-app-laravel.liquid', 
+                'value' => $snippet
+            ]
+        );
+
+        $shop->api()->rest('PUT', '/admin/api/2022-04/themes/'.$activeThemeId.'/assets.json', $data);
+        return "success theme";
+
+
     })->name('test');
     
 
