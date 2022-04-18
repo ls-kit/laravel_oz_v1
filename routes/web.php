@@ -46,18 +46,16 @@ Route::group(['middleware' => 'verify.shopify'], function () {
             }
         );
         $activeThemeId = $activeTheme[0]['id'];
-        $snippet = "{% section 'product-template' %}";
+        $snippet = "Hello this is new file";
         //Snippet to pass to rest api request
         $data = array(
             'asset'=> [
-                'key' => 'templates/product.lskit_theme_edit.liquid', 
+                'key' => 'snippets/newcode.liquid', 
                 'value' => $snippet
             ]
         );
         $shop->api()->rest('PUT', '/admin/api/2022-04/themes/'.$activeThemeId.'/assets.json', $data);
-        // get shop active currency
-        $shop_data = $shop->api()->rest('GET', '/admin/api/2022-04/shop.json');
-        $shop_active_currency = $shop_data['body']->shop->currency;
+        
         // Save activated shop
         return "Scuccessful installed";
 
