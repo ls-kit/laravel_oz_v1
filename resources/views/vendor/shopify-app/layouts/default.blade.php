@@ -8,6 +8,7 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
         <link rel="stylesheet" href="{{asset('css/app.css')}}" />
         <script src="https://unpkg.com/turbolinks"></script>
+        <script src="{{ asset('js/app.js') }}" type="text/javascript"></script>
          
         @yield('styles')
     </head>
@@ -16,13 +17,13 @@
         <div class="app-wrapper">
             <div class="app-content">
                 <main role="main">
-        <div class="container-fluid">
-        <div class="row">    
+                <div class="container-fluid">
+                <div class="row">    
 
                     @include('partials.navbar')
                     @yield('content')
-        </div>
-        </div>                    
+                </div>
+                </div>                    
                 </main>
             </div>
         </div>
@@ -52,6 +53,8 @@
         @endif
 
         @yield('scripts')
+        
+        <!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
     </body>
 </html>
 

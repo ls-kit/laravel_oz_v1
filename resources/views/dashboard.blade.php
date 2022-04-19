@@ -11,6 +11,7 @@
         
       </div>
       content here
+      <button onclick="setupTheme()">Make File</button>
     </main>
 
 @endsection
@@ -25,7 +26,17 @@
         title: 'Dashboard',
       }
         actions.TitleBar.create(app, titleBarOptions);
-    </script>
+
+        function setupTheme(){
+          axios.post('configureTheme')
+                .then(function(response) {
+                  alert(response);
+              })
+                .catch(function(error) {
+                  alert(error);
+              });
+        }    
+        </script>
 
 
 @endsection
