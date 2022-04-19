@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 class SettingController extends Controller
 {
-    // new added function 
+    // new added function
     public function configureTheme(){
         $shop = Auth::user();
         $themes = $shop->api()->rest('GET', '/admin/api/2022-04/themes.json');
@@ -26,14 +26,14 @@ class SettingController extends Controller
         //Snippet to pass to rest api request
         $data = array(
             'asset'=> [
-                'key' => 'snippets/ls_newcode.liquid', 
+                'key' => 'snippets/ls_newcode.liquid',
                 'value' => $snippet
             ]
         );
         $shop->api()->rest('PUT', '/admin/api/2022-04/themes/'.$activeThemeId.'/assets.json', $data);
-        
+
         // Save activated shop
-        return "Scuccessful installed";
+        return response()->json(['success' => 'Theme has been configured successfully.']);
     }
     /**
      * Display a listing of the resource.

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SettingController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -26,12 +27,18 @@ Route::group(['middleware' => 'verify.shopify'], function () {
     Route::get('/', function () {
         return view('dashboard');
     })->name('home');
-    
+
     Route::view('/products', 'products');
     Route::view('/customers', 'customers');
     Route::view('/settings', 'settings');
 
     // new added controlller
-    Route::post('configureTheme', "SettingController@configureTheme");
+    /**
+     * We are useing laravel ^8. routeing style hasbeen changed after laravel 7
+     * @see: https://laravel.com/docs/9.x/controllers
+     */
+    Route::post('settings/configure-theme', [SettingController::class, 'configureTheme']);
+    Route::resource('settings', SettingController::class);
+
 
 });
