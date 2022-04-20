@@ -28,7 +28,7 @@
         actions.TitleBar.create(app, titleBarOptions);
 
         function setupTheme(){
-          axios.post('settings/configure-theme')
+          axios.post('configure-theme')
                 .then(function(response) {
                   alert(response.data.success);
               })

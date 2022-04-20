@@ -37,7 +37,7 @@ Route::group(['middleware' => 'verify.shopify'], function () {
      * We are useing laravel ^8. routeing style hasbeen changed after laravel 7
      * @see: https://laravel.com/docs/9.x/controllers
      */
-    Route::post('settings/configure-theme', [SettingController::class, 'configureTheme']);
+    Route::post('configure-theme', [SettingController::class, 'configureTheme']);
     Route::resource('settings', SettingController::class);
 
 
