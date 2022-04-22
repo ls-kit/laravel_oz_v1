@@ -30,10 +30,10 @@
         function setupTheme(){
           axios.post('configure-theme')
                 .then(function(response) {
-                  alert(response.data.success);
+                  console.log(response);
               })
                 .catch(function(error) {
-                  alert(error);
+                  console.log(error);
               });
         }
         </script>
