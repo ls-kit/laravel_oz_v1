@@ -11,7 +11,9 @@
 
       </div>
       content here
-      <button onclick="setupTheme()">Make File</button>
+      @if (auth()->user()->name != $setting->shop_id)
+        <button onclick="setupTheme()">Make File</button>
+      @endif
     </main>
 
 @endsection

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\SettingController;
+use App\Models\Setting;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -25,7 +26,9 @@ use Illuminate\Support\Facades\Auth;
 
 Route::group(['middleware' => 'verify.shopify'], function () {
     Route::get('/', function () {
-        return view('dashboard');
+        $setting = Setting::where("shop_id", Auth::user()->name)->first();
+
+        return view('dashboard', compact('setting'));
     })->name('home');
 
     Route::view('/products', 'products');
