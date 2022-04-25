@@ -6,7 +6,7 @@ require("noty/src/noty.scss");
 require("noty/src/themes/mint.scss");
 window.Noty = require('noty');
 
-function addWishlist(){
+function addWishlist(customer, product_id){
     new Noty({
         type: 'success',
         layout: 'topRight',
@@ -32,7 +32,10 @@ wishbtn.addEventListener('click', function(){
         this.classList.remove('active');
     }else{
         this.classList.add('active');
-        addWishlist();  
+        var customer = this.dataset.customer;
+        var id = this.dataset.product;
+        // console.log('this:', this.dataset.product);
+        addWishlist(customer, id);  
     }
 
     

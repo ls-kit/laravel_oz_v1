@@ -3730,7 +3730,7 @@ __webpack_require__(/*! noty/src/themes/mint.scss */ "./node_modules/noty/src/th
 
 window.Noty = __webpack_require__(/*! noty */ "./node_modules/noty/lib/noty.js");
 
-function addWishlist() {
+function addWishlist(customer, product_id) {
   new Noty({
     type: 'success',
     layout: 'topRight',
@@ -3755,7 +3755,10 @@ wishbtn.addEventListener('click', function () {
     this.classList.remove('active');
   } else {
     this.classList.add('active');
-    addWishlist();
+    var customer = this.dataset.customer;
+    var id = this.dataset.product; // console.log('this:', this.dataset.product);
+
+    addWishlist(customer, id);
   }
 }); //  use this file in theme.liquid.  https://laraoz.loc/js/ls-app.js
 })();
