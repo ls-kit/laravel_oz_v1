@@ -1,18 +1,32 @@
+import axios from "axios";
 import  "../css/custom.css";
 
 
 
 require("noty/src/noty.scss");
 require("noty/src/themes/mint.scss");
+
 window.Noty = require('noty');
+window.axios = require('axios');
+
+const appDomain = "https://laraoz.loc";
 
 function addWishlist(customer, product_id){
-    new Noty({
-        type: 'success',
-        layout: 'topRight',
-        text: 'Added item to wishlist',
-        timeout: 300
-    }).show(); 
+    
+    axios.post(appDomain + '/api/addToWishlist', {customer_id: customer, product_id: product_id})
+    .then(response => {
+        console.log("response", response);
+    })
+    .catch(error=> {
+        console.log("ERROR", error);
+    })
+    
+    // new Noty({
+    //     type: 'success',
+    //     layout: 'topRight',
+    //     text: 'Added item to wishlist',
+    //     timeout: 300
+    // }).show(); 
 }
 
 function removeItem(){
