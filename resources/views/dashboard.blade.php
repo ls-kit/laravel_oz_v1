@@ -11,9 +11,35 @@
 
       </div>
       content here
-      @if (auth()->user()->name != $setting->shop_id)
-        <button onclick="setupTheme()">Make File</button>
-      @endif
+        {{-- @php
+            $components =
+                [
+                    [
+                        'id' => '1',
+                        'lable' => 'Shopify Slider',
+                        'name' => 'shopify_slider',
+                        'description' => 'Shopify App is a Laravel package that allows you to create a Shopify App in minutes.',
+                    ],
+                    [
+                        'id' => '2',
+                        'lable' => 'Shopify Navbar',
+                        'name' => 'shopify_navbar',
+                        'description' => 'Shopify App is a Laravel package that allows you to create a Shopify App in minutes.',
+                    ],
+                    [
+                        'id' => '3',
+                        'lable' => 'Shopify Footer',
+                        'name' => 'shopify_footer',
+                        'description' => 'Shopify App is a Laravel package that allows you to create a Shopify App in minutes.',
+                    ],
+
+                ]
+        @endphp --}}
+
+        @foreach ( $components as $theme )
+            <button onclick="setupTheme('{{ $theme['id']}}', '{{  $theme['name'] }}')">{{ $theme['label'] }}</button>
+        @endforeach
+
     </main>
 
 @endsection
@@ -29,8 +55,8 @@
       }
         actions.TitleBar.create(app, titleBarOptions);
 
-        function setupTheme(){
-          axios.post('configure-theme')
+        function setupTheme(id, name){
+          axios.post('configure-theme', {id: id, name: name})
                 .then(function(response) {
                   console.log(response);
               })

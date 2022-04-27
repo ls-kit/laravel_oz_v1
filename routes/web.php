@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\ThemeComponentController;
 use App\Models\Setting;
+use App\Models\ThemeComponent;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -27,13 +29,16 @@ use Illuminate\Support\Facades\Auth;
 Route::group(['middleware' => 'verify.shopify'], function () {
     Route::get('/', function () {
         $setting = Setting::where("shop_id", Auth::user()->name)->first();
+        $components = ThemeComponent::all();
 
-        return view('dashboard', compact('setting'));
+        return view('dashboard', compact('setting', 'components'));
     })->name('home');
 
     Route::view('/products', 'products');
     Route::view('/customers', 'customers');
     Route::view('/settings', 'settings');
+
+
 
     // new added controlller
     /**
@@ -44,4 +49,8 @@ Route::group(['middleware' => 'verify.shopify'], function () {
     Route::resource('settings', SettingController::class);
 
 
+});
+
+Route::group(['prefix' => 'admin'], function () {
+    Route::resource('components', ThemeComponentController::class);
 });

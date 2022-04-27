@@ -8,8 +8,13 @@ use Illuminate\Support\Facades\Auth;
 
 class SettingController extends Controller
 {
-    // new added function
-    public function configureTheme(){
+    /**
+     * Change Shopify theme
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function configureTheme(Request $request){
+        // return $request;
         $shop = Auth::user();
         $themes = $shop->api()->rest('GET', '/admin/api/2022-04/themes.json');
         $shopThemes = $themes['body']['themes'];
@@ -21,13 +26,18 @@ class SettingController extends Controller
                 return $e['role'] == $searchedThemeRole;
             }
         );
+        // return $activeTheme;
         $activeThemeId = $activeTheme[0]['id'];
-        $snippet = "Hello this is new file Ls";
+
+        $theme_path = public_path('shop_themes/'.$request->name.'.txt');
+        $theme_content = file_get_contents($theme_path);
+        // return $theme_content;
+
         //Snippet to pass to rest api request
         $data = array(
             'asset'=> [
-                'key' => 'snippets/ls_newcode.liquid',
-                'value' => $snippet
+                'key' => 'snippets/'.$request->name.'.liquid',
+                'value' => $theme_content
             ]
         );
         $shop->api()->rest('PUT', '/admin/api/2022-04/themes/'.$activeThemeId.'/assets.json', $data);
