@@ -53,7 +53,5 @@ Route::group(['middleware' => 'verify.shopify'], function () {
 
 Route::group(['prefix' => 'admin'], function () {
     Route::resource('components', ThemeComponentController::class);
-    Route::get('/demo', function () {
-        return view('layouts.master');
-    });
+
 });
