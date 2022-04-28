@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\ThemeComponent;
 use Illuminate\Http\Request;
 use Laravel\Ui\Presets\Vue;
-
+use File;
+use RealRashid\SweetAlert\Facades\Alert;
 class ThemeComponentController extends Controller
 {
     /**
@@ -15,7 +16,8 @@ class ThemeComponentController extends Controller
      */
     public function index()
     {
-        return view('theme.index');
+        $themeComponents = ThemeComponent::all();
+        return view('themes.index', compact('themeComponents'));
     }
 
     /**
@@ -25,7 +27,7 @@ class ThemeComponentController extends Controller
      */
     public function create()
     {
-        return view('themes.index');
+        return view('themes.create');
     }
 
     /**
@@ -61,8 +63,8 @@ class ThemeComponentController extends Controller
         $component->description = $request->description;
         $component->image = $imageName;
         $component->save();
-        return redirect()->back();
-
+        Alert::success('Component Created', 'component created successfully!');
+        return redirect()->route('components.index');
     }
 
     /**
@@ -101,22 +103,29 @@ class ThemeComponentController extends Controller
         $request->validate([
             'name' => 'required',
         ]);
-
-
-        $file = $request->file('source');
-        $file->storeAs(public_path('shop_themes'), $request->name.'.txt');
-
-        $file = $request->file('image');
-        $imageName = time().'-'. $request->name.'.'.$file->getClientOriginalExtension();
-        $file->storeAs(public_path('images'), $imageName);
-
         $component = ThemeComponent::find($id);
+
+        if($request->hasFile('source')){
+
+            $file = $request->file('source');
+            $file->storeAs(public_path('shop_themes'), $request->name.'.txt');
+        }
+
+        if($request->hasFile('image')){
+            $file = $request->file('image');
+            $imageName = time().'-'. $request->name.'.'.$file->getClientOriginalExtension();
+            $file->storeAs(public_path('images'), $imageName);
+            $component->image = $imageName;
+
+        }
+
+
         $component->name = $request->name;
         $component->label = $request->label;
         $component->description = $request->description;
-        $component->image = $imageName;
         $component->save();
-        return redirect()->back();
+        Alert::success('Component Updated', 'component updated successfully!');
+        return redirect()->route('components.index');
 
     }
 
@@ -128,6 +137,14 @@ class ThemeComponentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        
+        $component = ThemeComponent::find($id);
+        // delete file
+        $file = public_path('shop_themes/'.$component->name.'.txt');
+        if(File::exists($file)){
+            File::delete($file);
+        }
+        $component->delete();
+        return redirect()->route('components.index');
     }
 }

@@ -31,6 +31,3 @@ const app = new Vue({
     el: '#app',
 });
 
-const app_two = new Vue({
-    el: '#app_two',
-});

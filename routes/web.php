@@ -46,6 +46,7 @@ Route::group(['middleware' => 'verify.shopify'], function () {
      * @see: https://laravel.com/docs/9.x/controllers
      */
     Route::post('configure-theme', [SettingController::class, 'configureTheme']);
+    Route::post('install-script', [SettingController::class, 'scriptInstall']);
     Route::resource('settings', SettingController::class);
 
 

@@ -4,6 +4,8 @@
     <div class="card card-primary">
         <div class="card-header">
           <h3 class="card-title">Add Theme Components</h3>
+          <a href="{{ route('components.index') }}" class="btn btn-worning">Go back</a>
+
         </div>
         <!-- /.card-header -->
         <!-- form start -->

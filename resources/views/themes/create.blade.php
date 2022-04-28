@@ -4,10 +4,11 @@
     <div class="card card-primary">
         <div class="card-header">
           <h3 class="card-title">Add Theme Components</h3>
+          <a href="{{ route('components.index') }}" class="btn btn-primary">Go back</a>
         </div>
         <!-- /.card-header -->
         <!-- form start -->
-        <form action="{{ route('components.store') }}" method="post" enctype="multipart/form-data">\
+        <form action="{{ route('components.store') }}" method="post" enctype="multipart/form-data">
         @csrf
           <div class="card-body">
             <div class="form-group">

@@ -57,6 +57,34 @@ class SettingController extends Controller
 
         // return response()->json(['success' => 'Theme has been configured successfully.']);
     }
+
+    public function scriptInstall()
+    {
+        $shop = Auth::user();
+        $domain = 'https://'.env('SHOPIFY_SHOP_DOMAIN');
+
+        $shop = Auth::user();
+        $data = array(
+            "script_tag"=> [
+                "display_scope"=> "all",
+                "src"=> "$domain/js/ls-app.js",
+
+                "event"=> "onload"
+            ]
+
+        );
+        $shop->api()->rest('POST', '/admin/api/2022-04/script_tags.json', $data);
+
+        return Setting::updateOrCreate([
+            'shop_id' => $shop->name,
+            'name' => 'script_tag',
+            'src' => $domain.'/js/ls-app.js',
+            'activated' => true,
+        ]) ?  ['message' => 'Theme setup successfully'] : ['message' => 'Theme setup error!'];
+        return response('success');
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -64,7 +92,8 @@ class SettingController extends Controller
      */
     public function index()
     {
-        //
+        $script_setting = Setting::where('name', 'script_tag')->first();
+        return view('settings', compact('script_setting'));
     }
 
     /**
