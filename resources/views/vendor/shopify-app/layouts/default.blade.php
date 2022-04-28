@@ -1,3 +1,6 @@
+{{-- @extends('layouts.master') --}}
+
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -9,25 +12,26 @@
         <link rel="stylesheet" href="{{asset('css/app.css')}}" />
         <script src="https://unpkg.com/turbolinks"></script>
         <script src="{{ asset('js/app.js') }}" type="text/javascript"></script>
-         
+
         @yield('styles')
     </head>
 
     <body>
-        <div class="app-wrapper">
+        <div class="app-wrapper" id="app">
             <div class="app-content">
                 <main role="main">
                 <div class="container-fluid">
-                <div class="row">    
-
-                    @include('partials.navbar')
+                <div class="row">
+                    {{-- @include('partials.navbar') --}}
+                    @include('partials.topbar')
                     @yield('content')
                 </div>
-                </div>                    
+                </div>
                 </main>
             </div>
         </div>
 
+        <script src="{{ mix('js/app.js') }}"></script>
         @if(\Osiset\ShopifyApp\Util::getShopifyConfig('appbridge_enabled'))
             <script src="https://unpkg.com/@shopify/app-bridge{{ \Osiset\ShopifyApp\Util::getShopifyConfig('appbridge_version') ? '@'.config('shopify-app.appbridge_version') : '' }}"></script>
             <script src="https://unpkg.com/@shopify/app-bridge-utils{{ \Osiset\ShopifyApp\Util::getShopifyConfig('appbridge_version') ? '@'.config('shopify-app.appbridge_version') : '' }}"></script>
@@ -53,8 +57,9 @@
         @endif
 
         @yield('scripts')
-        
+
         <!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
+        <script src=""></script>
     </body>
 </html>
 

@@ -8,27 +8,9 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link @if(Request::path()== 'products') active @endif" href="/products">
-              <span data-feather="file"></span>
-              Products
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link @if(Request::path()== 'customers') active @endif" href="/customers">
-              <span data-feather="shopping-cart"></span>
-              Customers
-            </a>
-          </li>
-          <li class="nav-item">
             <a class="nav-link @if(Request::path()== 'settings') active @endif" href="/settings">
               <span data-feather="users"></span>
               Settings
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link @if(Request::path()== 'sinfo') active @endif" href="/sinfo">
-              <span data-feather="users"></span>
-              Shop Info
             </a>
           </li>
         </ul>

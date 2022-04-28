@@ -1,44 +1,28 @@
 @extends('shopify-app::layouts.default')
 
-
-<!-- You are: (shop domain name) -->
-<p>You are: {{ $shopDomain ?? Auth::user()->name }}</p>
 @section('content')
 
-    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Dashboard</h1>
+    <main class="col-md-12 ms-sm-auto col-lg-12 px-md-4">
+        <div class="container mt-3">
+            <h2>Choose Layouts</h2>
+            <div class="row">
 
-      </div>
-      content here
-        {{-- @php
-            $components =
-                [
-                    [
-                        'id' => '1',
-                        'lable' => 'Shopify Slider',
-                        'name' => 'shopify_slider',
-                        'description' => 'Shopify App is a Laravel package that allows you to create a Shopify App in minutes.',
-                    ],
-                    [
-                        'id' => '2',
-                        'lable' => 'Shopify Navbar',
-                        'name' => 'shopify_navbar',
-                        'description' => 'Shopify App is a Laravel package that allows you to create a Shopify App in minutes.',
-                    ],
-                    [
-                        'id' => '3',
-                        'lable' => 'Shopify Footer',
-                        'name' => 'shopify_footer',
-                        'description' => 'Shopify App is a Laravel package that allows you to create a Shopify App in minutes.',
-                    ],
+              @foreach ( $components as $theme )
+              <div class="col-md-3 my-2">
+                <div class="card img-fluid">
+                  <img src="../bootstrap4/img_avatar1.png">
+                  <div class="card-img-overlay">
+                    <h4 class="card-title">{{ $theme['label'] }}</h4>
+                    <p class="card-text">{{$theme['description']  }}</p>
+                    <button class="btn btn-primary" onclick="setupTheme('{{ $theme['id']}}', '{{  $theme['name'] }}')">Install</button>
+                  </div>
+                </div>
+              </div>
+              @endforeach
 
-                ]
-        @endphp --}}
+            </div>  <!-- .row end -->
 
-        @foreach ( $components as $theme )
-            <button onclick="setupTheme('{{ $theme['id']}}', '{{  $theme['name'] }}')">{{ $theme['label'] }}</button>
-        @endforeach
+          </div>
 
     </main>
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ThemeComponent;
 use Illuminate\Http\Request;
+use Laravel\Ui\Presets\Vue;
 
 class ThemeComponentController extends Controller
 {
@@ -14,7 +15,7 @@ class ThemeComponentController extends Controller
      */
     public function index()
     {
-        return view('theme-componet');
+        return view('theme.index');
     }
 
     /**
@@ -24,7 +25,7 @@ class ThemeComponentController extends Controller
      */
     public function create()
     {
-        //
+        return view('themes.index');
     }
 
     /**
@@ -35,10 +36,10 @@ class ThemeComponentController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
         $request->validate([
             'name' => 'required',
             'source' => 'required',
+            'image' => 'required',
         ]);
 
 
@@ -50,10 +51,15 @@ class ThemeComponentController extends Controller
         $file = $request->file('source');
         $file->storeAs(public_path('shop_themes'), $request->name.'.txt');
 
+        $file = $request->file('image');
+        $imageName = time().'-'. $request->name.'.'.$file->getClientOriginalExtension();
+        $file->storeAs(public_path('images'), $imageName);
+
         $component = new ThemeComponent();
         $component->name = $request->name;
         $component->label = $request->label;
         $component->description = $request->description;
+        $component->image = $imageName;
         $component->save();
         return redirect()->back();
 
@@ -78,7 +84,9 @@ class ThemeComponentController extends Controller
      */
     public function edit($id)
     {
-        //
+        $component = ThemeComponent::find($id);
+
+        return view('themes.update', compact('component'));
     }
 
     /**
@@ -90,7 +98,26 @@ class ThemeComponentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+        ]);
+
+
+        $file = $request->file('source');
+        $file->storeAs(public_path('shop_themes'), $request->name.'.txt');
+
+        $file = $request->file('image');
+        $imageName = time().'-'. $request->name.'.'.$file->getClientOriginalExtension();
+        $file->storeAs(public_path('images'), $imageName);
+
+        $component = ThemeComponent::find($id);
+        $component->name = $request->name;
+        $component->label = $request->label;
+        $component->description = $request->description;
+        $component->image = $imageName;
+        $component->save();
+        return redirect()->back();
+
     }
 
     /**
